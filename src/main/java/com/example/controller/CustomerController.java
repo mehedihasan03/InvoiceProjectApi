@@ -1,4 +1,4 @@
-package com.example.comtroller;
+package com.example.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,26 +14,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.model.Product;
-import com.example.service.ProductService;
+import com.example.model.Customer;
+import com.example.service.CustomerService;
 
 
 
 @RestController
 @CrossOrigin(origins = "*")
-public class ProductController {
+public class CustomerController {
 
 	@Autowired
-	ProductService productService;
+	CustomerService customerService;
 	
 	
-	@PostMapping(value = "/product/save")
-	public ResponseEntity<?> save(@RequestBody Product entity) {
+	@PostMapping(value = "/customer/save")
+	public ResponseEntity<?> save(@RequestBody Customer entity) {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			Product product = productService.save(entity);
+			Customer customer = customerService.save(entity);
 			map.put("message", "Data save successfully");
-			map.put("Data", product);
+			map.put("Data", customer);
 			map.put("Status code", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
@@ -47,13 +47,13 @@ public class ProductController {
 	
 	
 	
-	@GetMapping(value = "/product/findById/{id}")
+	@GetMapping(value = "/customer/findById/{id}")
 	public ResponseEntity<?> findById(@PathVariable(value = "id") Integer id) {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			Product product = productService.findById(id).get();
+			Customer customer = customerService.findById(id).get();
 			map.put("message", "Data get successfully");
-			map.put("Data", product);
+			map.put("Data", customer);
 			map.put("Status code", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
@@ -67,13 +67,13 @@ public class ProductController {
 	
 	
 	
-	@GetMapping(value = "/product/getAll")
+	@GetMapping(value = "/customer/getAll")
 	public ResponseEntity<?> getproducts() {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			List<Product> product =(List<Product>) productService.findAll();
+			List<Customer> customer = (List<Customer>) customerService.findAll();
 			map.put("message", "Data get successfully");
-			map.put("Data", product);
+			map.put("Data", customer);
 			map.put("Status code", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
@@ -88,13 +88,13 @@ public class ProductController {
 	
 	
 
-	@PostMapping(value = "/product/update")
-	public ResponseEntity<?> update(@RequestBody Product entity) {
+	@PostMapping(value = "/customer/update")
+	public ResponseEntity<?> update(@RequestBody Customer entity) {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			Product product = productService.save(entity);
+			Customer customer = customerService.save(entity);
 			map.put("message", "Data updated successfully");
-			map.put("Data", product);
+			map.put("Data", customer);
 			map.put("Status code", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
@@ -108,14 +108,14 @@ public class ProductController {
 
 	
 	
-	@GetMapping(value = "/product/delete/{id}")
+	@GetMapping(value = "/customer/delete/{id}")
 	public ResponseEntity<?> delete(@PathVariable(value = "id") Integer id) {
 		Map<String, Object> map = new HashMap<>();
-		Product product = productService.findById(id).get();
+		Customer customer = customerService.findById(id).get();
 		try {
-			productService.delete(product);
+			customerService.delete(customer);
 			map.put("message", "Data deleted successfully");
-			map.put("Data", product);
+			map.put("Data", customer);
 			map.put("Status code", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {

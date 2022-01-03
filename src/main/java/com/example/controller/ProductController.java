@@ -1,4 +1,4 @@
-package com.example.comtroller;
+package com.example.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,25 +14,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.model.Category;
-import com.example.service.CategoryService;
+import com.example.model.Product;
+import com.example.service.ProductService;
 
 
 
 @RestController
 @CrossOrigin(origins = "*")
-public class CategoryController {
-	
+public class ProductController {
+
 	@Autowired
-	public CategoryService categoryService;
+	ProductService productService;
 	
-	@PostMapping(value = "/category/save")
-	public ResponseEntity<?> save(@RequestBody Category entity) {
+	
+	@PostMapping(value = "/product/save")
+	public ResponseEntity<?> save(@RequestBody Product entity) {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			Category category = categoryService.save(entity);
+			Product product = productService.save(entity);
 			map.put("message", "Data save successfully");
-			map.put("Data", category);
+			map.put("Data", product);
 			map.put("Status code", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
@@ -44,13 +45,15 @@ public class CategoryController {
 		}
 	}
 	
-	@GetMapping(value = "/category/findById/{id}")
+	
+	
+	@GetMapping(value = "/product/findById/{id}")
 	public ResponseEntity<?> findById(@PathVariable(value = "id") Integer id) {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			Category category = categoryService.findById(id).get();
+			Product product = productService.findById(id).get();
 			map.put("message", "Data get successfully");
-			map.put("Data", category);
+			map.put("Data", product);
 			map.put("Status code", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
@@ -64,13 +67,13 @@ public class CategoryController {
 	
 	
 	
-	@GetMapping(value = "/category/getAll")
-	public ResponseEntity<?> getCategorys() {
+	@GetMapping(value = "/product/getAll")
+	public ResponseEntity<?> getproducts() {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			List<Category> category = (List<Category>) categoryService.findAll();
+			List<Product> product =(List<Product>) productService.findAll();
 			map.put("message", "Data get successfully");
-			map.put("Data", category);
+			map.put("Data", product);
 			map.put("Status code", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
@@ -85,13 +88,13 @@ public class CategoryController {
 	
 	
 
-	@PostMapping(value = "/category/update")
-	public ResponseEntity<?> update(@RequestBody Category entity) {
+	@PostMapping(value = "/product/update")
+	public ResponseEntity<?> update(@RequestBody Product entity) {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			Category category = categoryService.save(entity);
+			Product product = productService.save(entity);
 			map.put("message", "Data updated successfully");
-			map.put("Data", category);
+			map.put("Data", product);
 			map.put("Status code", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
@@ -105,14 +108,14 @@ public class CategoryController {
 
 	
 	
-	@GetMapping(value = "/category/delete/{id}")
+	@GetMapping(value = "/product/delete/{id}")
 	public ResponseEntity<?> delete(@PathVariable(value = "id") Integer id) {
 		Map<String, Object> map = new HashMap<>();
-		Category category = categoryService.findById(id).get();
+		Product product = productService.findById(id).get();
 		try {
-			categoryService.delete(category);
+			productService.delete(product);
 			map.put("message", "Data deleted successfully");
-			map.put("Data", category);
+			map.put("Data", product);
 			map.put("Status code", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
