@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.model.Category;
@@ -25,6 +26,25 @@ public class CategoryController {
 	
 	@Autowired
 	public CategoryService categoryService;
+	
+	
+	@GetMapping(value = "/category/search")
+	public ResponseEntity<?> search(@RequestParam(value = "searchText") String searchText) {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			List<Category> product = categoryService.searchCategories(searchText);
+			map.put("message", "Data get successfully");
+			map.put("Data", product);
+			map.put("Status code", 200);
+			return ResponseEntity.ok(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("message", "Data fetch failed");
+			map.put("Data", null);
+			map.put("Status code", 400);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+		}
+	}
 	
 	@PostMapping(value = "/category/save")
 	public ResponseEntity<?> save(@RequestBody Category entity) {
