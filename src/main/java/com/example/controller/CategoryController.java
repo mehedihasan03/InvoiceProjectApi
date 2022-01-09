@@ -32,9 +32,9 @@ public class CategoryController {
 	public ResponseEntity<?> search(@RequestParam(value = "searchText") String searchText) {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			List<Category> product = categoryService.searchCategories(searchText);
+			List<Category> categoryList = categoryService.searchCategories(searchText);
 			map.put("message", "Data get successfully");
-			map.put("Data", product);
+			map.put("Data", categoryList);
 			map.put("Status code", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {

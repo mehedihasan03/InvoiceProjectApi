@@ -32,9 +32,9 @@ public class CustomerController {
 	public ResponseEntity<?> search(@RequestParam(value = "searchText") String searchText) {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			List<Customer> product = customerService.searchCustomer(searchText);
+			List<Customer> customer = customerService.searchCustomer(searchText);
 			map.put("message", "Data get successfully");
-			map.put("Data", product);
+			map.put("Data", customer);
 			map.put("Status code", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {

@@ -12,7 +12,7 @@ import com.example.model.Product;
 @Repository
 public interface ProductService extends JpaRepository<Product, Integer>{
 
-	@Query("SELECT p from Product p where p.pname like %?1%")
+	@Query("SELECT p from Product p where p.pname like %?1% or p.cname like %?1%")
 	List<Product> searchProducts(String searchText);
 	
 }
