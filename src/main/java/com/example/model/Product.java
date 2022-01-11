@@ -1,5 +1,6 @@
 package com.example.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,8 +17,17 @@ public class Product {
     private String pname;
     private String cname;
     private double price;
+    @Column(columnDefinition = "integer default 1")
+    private int quantity;
     
     
+	
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 	public int getPid() {
 		return pid;
 	}
