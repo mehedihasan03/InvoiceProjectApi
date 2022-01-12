@@ -18,7 +18,7 @@ public class Product {
     private String cname;
     private double price;
     @Column(columnDefinition = "integer default 1")
-    private int quantity;
+    private int quantity = 1;
     
     
 	
