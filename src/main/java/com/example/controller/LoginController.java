@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.model.User;
-import com.example.request.PayLoad;
 import com.example.service.UserService;
 
 @RestController
