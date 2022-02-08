@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.model.Invoice;
@@ -22,6 +23,26 @@ public class InvoiceController {
 
 	@Autowired
 	private InvoiceService invoiceService;
+	
+	
+	@GetMapping(value = "/invoice/search")
+	public ResponseEntity<?> search(@RequestParam(value = "searchText") String searchText) {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			List<Invoice> invoice = invoiceService.searchInvoice(searchText);
+			map.put("message", "Data get successfully");
+			map.put("Data", invoice);
+			map.put("Status code", 200);
+			return ResponseEntity.ok(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("message", "Data fetch failed");
+			map.put("Data", null);
+			map.put("Status code", 400);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+		}
+	}
+	
 	
 	@PostMapping(value = "/invoice/save")
 	public ResponseEntity<?> save(@RequestBody Invoice entity) {
