@@ -58,4 +58,22 @@ public class InvoiceController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
+	
+	@GetMapping(value = "/invoice/current-sale")
+	public ResponseEntity<?> getSalesOfCurrentMonth() {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			long totalsale = invoiceService.getAllOfCurrentMonth();
+			map.put("message", "Data get successfully");
+			map.put("Data", totalsale);
+			map.put("Status code", 200);
+			return ResponseEntity.ok(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("message", "Data fetch failed");
+			map.put("Data", null);
+			map.put("Status code", 400);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+		}
+	}
 }
