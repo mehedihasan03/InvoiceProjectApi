@@ -4,5 +4,7 @@ import com.example.model.MailModel;
 
 public interface MailService {
 
-	public void sendMail(MailModel mailModel);
+	public void sendUserEmail(MailModel mailModel);
+	
+	public void sendCustomerEmail(MailModel mailModel);
 }

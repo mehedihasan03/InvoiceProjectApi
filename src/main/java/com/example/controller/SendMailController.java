@@ -21,11 +21,11 @@ public class SendMailController {
 	@Autowired
 	private  MailService mailService;
 
-	@PostMapping("/sendAnEmail")
-	public ResponseEntity<?> sendEmail(@RequestBody MailModel mailModel){
+	@PostMapping("/sendUserEmail")
+	public ResponseEntity<?> sendUserEmail(@RequestBody MailModel mailModel){
 		Map<String, Object> data = new HashMap<String, Object>();
 		try {
-			mailService.sendMail(mailModel);
+			mailService.sendUserEmail(mailModel);
 			data.put("status", "Success");
 			data.put("message", "mail send successfully");
 			return ResponseEntity.status(HttpStatus.OK).body(data);
@@ -36,4 +36,18 @@ public class SendMailController {
 		}
 	}
 	
+	@PostMapping("/sendCustomerEmail")
+	public ResponseEntity<?> sendCustomerEmail(@RequestBody MailModel mailModel){
+		Map<String, Object> data = new HashMap<String, Object>();
+		try {
+			mailService.sendCustomerEmail(mailModel);
+			data.put("status", "Success");
+			data.put("message", "mail send successfully");
+			return ResponseEntity.status(HttpStatus.OK).body(data);
+		} catch (Exception e) {
+			data.put("status", "Failed");
+			data.put("message", e.getLocalizedMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(data);
+		}
+	}
 }

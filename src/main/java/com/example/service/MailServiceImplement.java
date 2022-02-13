@@ -15,7 +15,7 @@ public class MailServiceImplement implements MailService {
 	private JavaMailSender javaMailSender;
 
 	@Override
-	public void sendMail(MailModel mailModel) throws MailSendException {
+	public void sendUserEmail(MailModel mailModel) throws MailSendException {
 		
 		SimpleMailMessage msg = new SimpleMailMessage();
 		msg.setFrom("mehedi.hasan.jee@gmail.com");
@@ -25,6 +25,17 @@ public class MailServiceImplement implements MailService {
 		javaMailSender.send(msg);
 		System.out.println("====ok=====");
 		
+	}
+
+	@Override
+	public void sendCustomerEmail(MailModel mailModel) throws MailSendException {
+		SimpleMailMessage msg  = new SimpleMailMessage();
+		msg.setFrom("mehedi.hasan.jee@gmail.com");
+		msg.setTo(mailModel.getReceiver());
+		msg.setSubject("Welcome Sir");
+		msg.setText("You are successfully registered as a new Customer");
+		javaMailSender.send(msg);
+		System.out.println("====ok=====");
 	}
 
 }
