@@ -13,4 +13,6 @@ public interface CustomerService extends CrudRepository<Customer, Integer> {
 
 	@Query("SELECT c from Customer c where c.name like %?1% or c.phone like %?1%")
 	List<Customer> searchCustomer(String searchText);
+	
+
 }

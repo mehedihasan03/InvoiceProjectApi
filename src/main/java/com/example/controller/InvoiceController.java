@@ -84,9 +84,9 @@ public class InvoiceController {
 	public ResponseEntity<?> getSalesOfCurrentMonth() {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			long totalsale = invoiceService.getAllOfCurrentMonth();
+			long totalSale = invoiceService.getAllOfCurrentMonth();
 			map.put("message", "Data get successfully");
-			map.put("Data", totalsale);
+			map.put("Data", totalSale);
 			map.put("Status code", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
