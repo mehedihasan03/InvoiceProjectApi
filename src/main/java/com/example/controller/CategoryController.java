@@ -145,4 +145,21 @@ public class CategoryController {
 	}
 	
 
+	@GetMapping(value = "/category/count-category")
+	public ResponseEntity<?> getcountCategory() {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			long countCategory = categoryService.count();
+			map.put("message", "Data get successfully");
+			map.put("Data", countCategory);
+			map.put("Status code", 200);
+			return ResponseEntity.ok(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("message", "Data fetch failed");
+			map.put("Data", null);
+			map.put("Status code", 400);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+		}
+	}
 }
