@@ -149,4 +149,21 @@ public class ProductController {
 	}
 	
 
+	@GetMapping(value = "/product/count-product")
+	public ResponseEntity<?> getcountProduct() {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			long countProduct = productService.count();
+			map.put("message", "Data get successfully");
+			map.put("Data", countProduct);
+			map.put("Status code", 200);
+			return ResponseEntity.ok(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("message", "Data fetch failed");
+			map.put("Data", null);
+			map.put("Status code", 400);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+		}
+	}
 }
