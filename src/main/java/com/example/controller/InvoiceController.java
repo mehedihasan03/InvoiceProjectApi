@@ -115,4 +115,41 @@ public class InvoiceController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
+	
+	
+	@GetMapping(value = "/invoice/count-today-invoices")
+	public ResponseEntity<?> getcountTodayInvoices() {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			long countTodayInvoices = invoiceService.getCountTodayInvoices();
+			map.put("message", "Data get successfully");
+			map.put("Data", countTodayInvoices);
+			map.put("Status code", 200);
+			return ResponseEntity.ok(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("message", "Data fetch failed");
+			map.put("Data", null);
+			map.put("Status code", 400);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+		}
+	}
+	
+	@GetMapping(value = "/invoice/count-daily-sale")
+	public ResponseEntity<?> totalPrice() {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			long dailySale = invoiceService.getDailySale();
+			map.put("message", "Data get successfully");
+			map.put("Data", dailySale);
+			map.put("Status code", 200);
+			return ResponseEntity.ok(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("message", "Data fetch failed");
+			map.put("Data", null);
+			map.put("Status code", 400);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+		}
+	}
 }

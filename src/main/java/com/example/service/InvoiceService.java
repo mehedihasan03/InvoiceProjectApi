@@ -16,4 +16,10 @@ public interface InvoiceService extends JpaRepository<Invoice, Long>{
 
 	@Query("SELECT i from Invoice i where i.customerName like %?1% or i.id like %?1% or i.paymentDate like %?1%")
 	List<Invoice> searchInvoice(String searchText);
+	
+	@Query("select count(e.id) from Invoice e where e.paymentDate = current_date()")
+	long getCountTodayInvoices();
+	
+	@Query("select sum(e.totalPrice) from Invoice e where e.paymentDate = current_date()")
+	long getDailySale();
 }
