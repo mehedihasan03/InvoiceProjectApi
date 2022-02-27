@@ -66,7 +66,7 @@ public class InvoiceController {
 	public ResponseEntity<?> getInvoice() {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			List<Invoice> invoice =(List<Invoice>) invoiceService.findAll();
+			List<Invoice> invoice = invoiceService.findAll();
 			map.put("message", "Data get successfully");
 			map.put("Data", invoice);
 			map.put("Status code", 200);
