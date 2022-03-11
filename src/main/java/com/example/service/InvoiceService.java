@@ -22,4 +22,9 @@ public interface InvoiceService extends JpaRepository<Invoice, Long>{
 	
 	@Query("select sum(e.totalPrice) from Invoice e where e.paymentDate = current_date()")
 	long getDailySale();
+	
+	 List<Invoice> findTop10ByOrderByIdDesc();
+//	
+//	@Query("SELECT i from Invoice i order by id desc limit 10")
+//	List<Invoice> findLast10();
 }

@@ -80,6 +80,24 @@ public class InvoiceController {
 		}
 	}
 	
+	@GetMapping(value = "/invoice/getLast10")
+	public ResponseEntity<?> getLast10() {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			List<Invoice> invoice =(List<Invoice>) invoiceService.findTop10ByOrderByIdDesc();
+			map.put("message", "Data get successfully");
+			map.put("Data", invoice);
+			map.put("Status code", 200);
+			return ResponseEntity.ok(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("message", "Data fetch failed");
+			map.put("Data", null);
+			map.put("Status code", 400);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+		}
+	}
+	
 	@GetMapping(value = "/invoice/current-sale")
 	public ResponseEntity<?> getSalesOfCurrentMonth() {
 		Map<String, Object> map = new HashMap<>();
